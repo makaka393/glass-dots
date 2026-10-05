@@ -1,0 +1,151 @@
+/* rofi — Material 3 Expressive + стекло. Цвета: ~/.cache/matugen/colors-rofi.rasi */
+configuration {
+    modi: "drun,run";
+    show-icons: true;
+    drun-display-format: "{name}";
+    display-drun: "apps";
+    display-run: "terminal";
+    font: "Google Sans Flex Medium 13";
+    run-command: "bash -c 'pw-play ~/Downloads/audiomass-output.wav & {cmd}'";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+
+@import "~/.cache/matugen/colors-rofi.rasi"
+
+* {
+    background-color: transparent;
+    text-color: @fg;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+    border: 0;
+    border-color: transparent;
+}
+
+/* окно появляется под центральным островом бара */
+window {
+    location: north;
+    anchor: north;
+    y-offset: 60px;
+    width: 620px;
+    transparency: "real";
+    border: 1px solid;
+    border-color: @glass-border;
+    border-radius: 28px;
+    background-color: @glass;
+    padding: 14px;
+}
+
+mainbox {
+    spacing: 12px;
+    children: [ inputbar, listview, mode-switcher ];
+}
+
+/* ── строка поиска: пилюля с иконкой */
+inputbar {
+    padding: 4px 6px 4px 14px;
+    spacing: 10px;
+    border-radius: 24px;
+    background-color: @chip;
+    children: [ textbox-search, entry ];
+}
+textbox-search {
+    expand: false;
+    str: "search";
+    font: "Material Symbols Rounded 22";
+    text-color: @primary;
+    vertical-align: 0.5;
+    padding: 8px 0;
+}
+entry {
+    placeholder: "Поиск приложений";
+    placeholder-color: @fg-variant;
+    text-color: @fg;
+    cursor: text;
+    vertical-align: 0.5;
+    padding: 10px 0;
+}
+
+/* ── список */
+listview {
+    lines: 7;
+    columns: 1;
+    dynamic: false;
+    fixed-height: true;
+    scrollbar: false;
+    spacing: 4px;
+    border: 0;
+}
+element {
+    padding: 8px 14px;
+    spacing: 14px;
+    border-radius: 24px;
+    cursor: pointer;
+}
+element normal.normal, element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+element normal.urgent, element alternate.urgent {
+    text-color: @error;
+}
+element normal.active, element alternate.active {
+    text-color: @primary;
+}
+/* выбранный пункт: тональная заливка и «более квадратная» форма — как в M3 Expressive */
+element selected.normal, element selected.active {
+    background-color: @selected-bg;
+    text-color: @primary;
+    border-radius: 16px;
+}
+element-icon {
+    size: 32px;
+    vertical-align: 0.5;
+    cursor: inherit;
+}
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+    highlight: bold;
+    cursor: inherit;
+}
+
+/* ── переключатель режимов: иконки Material */
+mode-switcher {
+    spacing: 8px;
+    expand: false;
+    border: 0;
+}
+button {
+    padding: 8px 0;
+    border-radius: 20px;
+    background-color: @chip;
+    text-color: @fg-variant;
+    font: "Material Symbols Rounded 20";
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    cursor: pointer;
+}
+button selected {
+    background-color: @selected-bg;
+    text-color: @primary;
+}
+
+/* ── сообщения/ошибки */
+message {
+    padding: 10px 14px;
+    border-radius: 18px;
+    background-color: @chip;
+}
+textbox {
+    text-color: @fg;
+    vertical-align: 0.5;
+}
+error-message {
+    padding: 16px;
+    border-radius: 20px;
+    background-color: @glass;
+    text-color: @error;
+}

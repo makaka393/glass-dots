@@ -1,0 +1,26 @@
+#!/bin/sh
+# SDDM (X11): перед экраном входа ставим каждому монитору родное разрешение
+# и максимальную частоту — иначе Xorg на NVIDIA иногда берёт «безопасный» режим.
+[ -x /usr/share/sddm/scripts/Xsetup ] && /usr/share/sddm/scripts/Xsetup
+command -v xrandr >/dev/null || exit 0
+Q=$(xrandr --query 2>/dev/null) || exit 0
+for out in $(printf '%s\n' "$Q" | awk '/ connected/{print $1}'); do
+  best=$(printf '%s\n' "$Q" | awk -v o="$out" '
+    $1 == o { f = 1; next }
+    f && /^[^ \t]/ { f = 0 }
+    f && $1 ~ /^[0-9]+x[0-9]+/ {
+      split($1, r, "x"); px = r[1] * r[2]
+      for (i = 2; i <= NF; i++) {
+        v = $i; gsub(/[*+]/, "", v); v += 0
+        if (v > 0 && (px > bp || (px == bp && v > br))) { bp = px; br = v; bm = $1 }
+      }
+    }
+    END { if (bm != "") print bm, br }')
+  if [ -n "$best" ]; then
+    set -- $best
+    xrandr --output "$out" --mode "$1" --rate "$2" || xrandr --output "$out" --auto
+  else
+    xrandr --output "$out" --auto
+  fi
+done
+exit 0

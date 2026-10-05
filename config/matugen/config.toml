@@ -1,0 +1,55 @@
+[config]
+caching = false
+# если на обоях не нашлось нормального цвета
+fallback_color = "#7aa2f7"
+# при нескольких кандидатах берём самый насыщенный, без интерактивного вопроса
+prefer = "saturation"
+
+# свои цвета: matugen подгоняет их под тему (blend) и даёт роли
+# colors.<имя>, on_<имя>, <имя>_container — используются в шаблонах
+[config.custom_colors]
+term_red = "#e5484d"
+term_green = "#46a758"
+term_yellow = "#f5d90a"
+term_blue = "#3e63dd"
+term_magenta = "#ab4aba"
+term_cyan = "#12a594"
+
+[templates.hyprland]
+input_path = "~/.config/matugen/templates/hyprland.conf"
+output_path = "~/.cache/matugen/colors-hyprland.conf"
+
+[templates.kitty]
+input_path = "~/.config/matugen/templates/kitty.conf"
+output_path = "~/.cache/matugen/colors-kitty.conf"
+# expressive крутит оттенки (красный становится синим) — для терминала берём tonal-spot
+type = "SchemeTonalSpot"
+
+[templates.gtk3]
+input_path = "~/.config/matugen/templates/gtk.css"
+output_path = "~/.config/gtk-3.0/colors.css"
+
+[templates.gtk4]
+input_path = "~/.config/matugen/templates/gtk.css"
+output_path = "~/.config/gtk-4.0/colors.css"
+
+[templates.btop]
+input_path = "~/.config/matugen/templates/btop.theme"
+output_path = "~/.config/btop/themes/matugen.theme"
+
+# для бара на Quickshell (этап 2) — он сам подхватит изменения файла
+[templates.quickshell]
+input_path = "~/.config/matugen/templates/colors.json"
+output_path = "~/.cache/matugen/colors.json"
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi.rasi"
+output_path = "~/.cache/matugen/colors-rofi.rasi"
+
+[templates.kde]
+input_path = "~/.config/matugen/templates/kde.colors"
+output_path = "~/.local/share/color-schemes/Matugen.colors"
+
+[templates.sddm]
+input_path = "~/.config/matugen/templates/sddm.conf"
+output_path = "~/.cache/matugen/sddm-colors.conf"
