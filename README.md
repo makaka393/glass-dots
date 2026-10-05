@@ -3,7 +3,7 @@
 Arch + Hyprland в стиле **Material 3 Expressive + матовое стекло**. Все цвета — из обоев
 через [matugen](https://github.com/InioX/matugen) и меняются на лету.
 
-![рабочий стол](assets/desktop.png)
+![рабочий стол](assets/desktop-182723.png)
 
 ## Что внутри
 
